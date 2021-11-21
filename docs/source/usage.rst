@@ -71,10 +71,16 @@ Code Structure
 HH submodule
 ------------------------
 
+
+
 .. _LC:
 
 LC submodule
 -----------------------------
+
+.. note::
+   Some of the parameters or variables shared by different functions or scripted are described only once to avoid redundancy.
+
 
 .. _dgep_run_LC:
 
@@ -227,7 +233,12 @@ dgep_Variables_LC_reg
 .. _dgep_Constraints_LC_reg:
 
 dgep_Constraints_LC_reg
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This script is used to define constraints used for the optimization
+
 
 
 .. _dgep_Objective_LC_reg:
@@ -235,25 +246,42 @@ dgep_Constraints_LC_reg
 dgep_Objective_LC_reg
 ~~~~~~~~~~~~~~~~~~~~~
 
+* Description
+
+  * This script is used to define objective used for the optimization
+
+
+
 .. _dgep_saveoutput_LC_reg:
 
 dgep_saveoutput_LC_reg
 ~~~~~~~~~~~~~~~~~~~~~
 
+* Description
+
+  * This sript is used to save and process important results into the output structure
+
+
 
 .. _output_wrapper_LC:
 
 output_wrapper_LC
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   resDistIv_LC_agg = output_wrapper_LC(ScenarioId,ExaminedYear,dgepfolder,dgepfolder_output)
+
+* Description
+
+  * This is the function to combine LC submodule outputs for different regions (i.e., municipalities) into one  
+  
+
 
 .. _testing_LC_reg:
 
 testing_LC_reg
 ~~~~~~~~~~~~~~
-
-
-
-To test the standalone version of the LC submodule, you can run the ``testing_LC_reg()`` function.
 
 * Description
 
