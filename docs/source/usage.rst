@@ -3,9 +3,8 @@ Usage
 
 
 
-.. note:: 
-
-add note here....
+.. note::
+   The project is under active development and the document is subject to changed made to codes
 
 
 
