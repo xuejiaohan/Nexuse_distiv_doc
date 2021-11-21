@@ -153,15 +153,76 @@ dgep_Run_LC_reg
 dgep_struct2variable_LC_reg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* Description
+
+  * This script is used to unwrapp the input data/parameters so as to be used for the LC submodule
+
+* Data structure
+
+  * ``TimeSeries``: time series data
+  * ``units``: characteristics of the candidate units
+  * ``general``: general identifications of the candidate units
+  * ``costs``: cost related data
+  * ``region``: region related data
+  * ``dsm``: demand side management related data
+  * ``mapping_table``: mapping data defining the relationship between canton, district, municipality, and transmission nodes at the tranmission level
+
+
 .. _dgep_Variables_LC_reg:
 
 dgep_Variables_LC_reg
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. _dgep_Variables_LC_reg:
+* Description
 
-dgep_Variables_LC_reg
-~~~~~~~~~~~~~~~~~~~~~
+  * This script is used to define variables used for the LC submodule
+
+.. warning::
+    Currently system-controlled DSM is implemented in the DSO submodule, changes need to be made if later self-controlled DSM in LC submodule is needed.
+
+* Variables
+
+  * ``x_exist``: existing capacities per technology type and per simulated municipality
+  * ``p_exist``: power output of existing units per technology and per simulated municipality
+  * ``p_exist_curt``:curtailment of existing units per technology and per simulated municipality
+  * ``p_exist_yearly``: power output of existing units per technology per installed year
+  * ``x_exist``: existing capacities per technology type and per simulated municipality
+  * ``R_Ug_exist``: upward reserve provided by the conventional generation unit and per simulated municipality
+  * ``R_Dg_exist``: downward reserve provided by the conventional generation unit and per simulated municipality
+
+  * ``x_inv``: continuous investment capacities per technology type and per simulated municipality
+  * ``p_unit``: power output of newly invested units per technology type and per simulated municipality
+  * ``p_unit_curt``: power curtailment of newly invested units per technology type and per simulated municipality
+
+  * ``p_lnew``: updated load profile after shifting
+  * ``r_Lu``: upward load shifting (load increase)
+  * ``r_Ld``: downward load shifting (load decrease)
+
+  * ``P_DA``: hourly electricity exchange with selling indicated by positive values per simulated municipality 
+  * ``P_DAs``: hourly electricity sale per simulated municipality
+  * ``P_DAb``: hourly electricity purchase per simulated municipality
+
+  * ``R_Ug``: hourly upward reserve provided by the dispatchable generation unit per simulated municipality 
+  * ``R_Dg``: hourly downward reserve provided by the dispatchable generation unit per simulated municipality 
+  * ``R_Ul``: hourly upward reserve provided by flexible load units (DSM) per simulated municipality 
+  * ``R_Dl``: hourly downward reserve provided by flexible load units (DSM) per simulated municipality 
+
+  * ``P_RMu_res``: total hourly residual upward reserve requirement after considering the DER reserve provision
+  * ``P_RMd_res``: total hourly residual downward reserve requirement after considering the DER reserve provision
+  * ``P_RMu_bid``: total hourly upward reserve bidding per simulated municipality 
+  * ``P_RMd_bid``: total hourly downward reserve bidding per simulated municipality 
+
+  * ``C_inv``: investment cost
+  * ``C_foc``: fixed operating cost
+  * ``C_voc``: variable operating cost
+  * ``C_fuel``: fuel cost
+  * ``C_discom``: discomfort cost for dispatching DSM
+  * ``C_emi``: emission cost
+  * ``R_selfcon``: revenues from self-consumption savings
+  * ``R_markets``: revenues from bidding energy/reserve into the markets
+  * ``R_subsidy``: revenues from subsidy
+  * ``R_heat``: revenues from heat credit
+
 
 .. _dgep_Constraints_LC_reg:
 
