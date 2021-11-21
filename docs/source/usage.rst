@@ -1,5 +1,7 @@
 Usage
-=====
+*****
+
+
 
 .. note:: 
 
@@ -11,7 +13,7 @@ add note here....
 .. _installation:
 
 Installation
-------------
+============
 
 To run DistIv module on ETH server `Euler <https://scicomp.ethz.ch/wiki/Getting_started_with_clusters>`_, please refer to `Nexus-e document <https://nexus-e.readthedocs.io/en/latest/index.html>`_.
 
@@ -27,15 +29,15 @@ To run DistIv module on your own machine, please install/download:
 .. _structure:
 
 Code Structure
---------------
+==============
 
 * input
-* runHH_district (Check out the :ref:`HH submodule` section)
+* runHH_district (Check out the :ref:`HH` section)
 
   * with a nested list
   * and some subitems
   
-* runLC_municipality (Check out the :ref:`LC submodule` section)
+* runLC_municipality (Check out the :ref:`LC` section)
 
   * dgep_run_LC.m :ref:`dgep_run_LC`
   * dgep_Run_LC_reg.m		
@@ -47,7 +49,7 @@ Code Structure
   * output_wrapper_LC.m
   * testing_LC_reg.m
   
-* runDSO_municipality (Check out the :ref:`DSO submodule` section)
+* runDSO_municipality (Check out the :ref:`DSO` section)
 
   * dgep_run_DSO.m
   * dgep_Run_DSO_reg.m		
@@ -74,6 +76,9 @@ LC (large consumer) submodule
 -----------------------------
 
 .. _dgep_run_LC:
+
+dgep_run_LC
+~~~~~~~~~~~~
 
 To retrieve the optimal investments and dispatch decisions made by large consumers, you can run the ``dgep_run_LC()`` function:
 
