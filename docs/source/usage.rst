@@ -93,6 +93,7 @@ dgep_run_LC
 * Parameters
 
   * ``obj``: DistIv object
+  * ``data``: input data structure retrieved from the database
   * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
   * ``ScenarioId``: index for the simulated scenario
   * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
@@ -103,7 +104,7 @@ dgep_run_LC
 
 * What the function returns
 
-  * Optimal investments and dispatch decisions made by large consumers for each region (i.e., municipalities in Switzerland)
+  * Optimal investments and dispatch decisions made by large consumers all regions (i.e., municipalities in Switzerland)
 
 
 
@@ -114,30 +115,36 @@ dgep_Run_LC_reg
 
 .. code-block::
 
-resDistIv_LC = dgep_Run_LC_reg(CGEPtoDGEP, data, ScenarioId,...
- ExaminedYear, T, RepresentPeriods, NumSameSimulate, n_periods, nMuni,...
- i_Muni_start, i_Muni_end, alpha_ex, T_r, dgepfolder,dgepfolder_output)
+   resDistIv_LC = dgep_Run_LC_reg(CGEPtoDGEP, data, ScenarioId, ExaminedYear, ...
+   T, RepresentPeriods, NumSameSimulate, n_periods, nMuni,...
+   i_Muni_start, i_Muni_end, alpha_ex, T_r, dgepfolder,dgepfolder_output)
 
 * Description
 
-  * This is the main running script for the LC submodule
+  * This is the function to run the optimization for a number of regions (i.e., municipalities)
 
 * Parameters
 
-  * ``obj``: DistIv object
+  * ``data``: input data structure retrieved from the database
   * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
   * ``ScenarioId``: index for the simulated scenario
   * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
   * ``T``: simulated hours for each examined year
   * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
   * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
-
+  * ``n_periods``: 
+  * ``nMuni``: number of municipalities to be optimized for each run (adjusted considering a trade-off between the time consumed for each run and the total number of runnings, as optimizations for each municipality can be made in parallel)
+  * ``i_Muni_start``: index of the municipality to start with 
+  * ``i_Muni_end``: index of the municipality to end with
+  * ``alpha_ex``: ratio used to approximate the transformer capacity together with the peak demand (i.e., trafo capacity = alpha_ex * peak demand)
+  * ``T_r``: time length of the reserve product
+  * ``dgepfolder``: path of the DistIv folder
+  * ``dgepfolder_output``: path of the DistIv output folder
+  
 
 * What the function returns
 
-  * Optimal investments and dispatch decisions made by large consumers for each region (i.e., municipalities in Switzerland)
-
-
+  * Optimal investments and dispatch decisions made by large consumers for a number of regions (number = nMuni)
 
 
 
