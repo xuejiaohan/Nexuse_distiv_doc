@@ -81,16 +81,17 @@ DSO (distribution system operator) submodule
 --------------------------------------------
 
 
-.. code-block:: console
+.. code-block::
 
-   (.venv) $ pip install lumache
-   
-   
-   .. code-block:: ruby
+   function resDistIv_LC_agg = dgep_run_LC(obj,CGEPtoDGEP, data, ScenarioId, ExaminedYear, T,...
+    RepresentPeriods,NumSameSimulate)
 
-   Some Ruby code.
-  
-  
+* Description
+
+* Parameters
+
+* What the function returns
+
   
   
 
