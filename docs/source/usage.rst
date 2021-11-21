@@ -33,9 +33,23 @@ Code Structure
 * input
 * runHH_district (Check out the :ref:`HH` section)
 
-  * with a nested list
-  * and some subitems
-  
+  * testing_HH
+  * ratio_municipalityOFcanton
+  * readinput_CH
+  * readinput_reg
+  * readinput_sim
+  * canton2municipality
+  * dgep_run_HH
+  * run_reg
+  * run_struct2variable_reg
+  * run_variables_reg
+  * run_constraints_reg
+  * run_objective_reg
+  * run_postprocess_reg_full
+  * run_saveoutput_reg
+  * output_wrapper_HH
+
+
 * runLC_municipality (Check out the :ref:`LC` section)
 
   * :ref:`dgep_run_LC`
@@ -51,18 +65,24 @@ Code Structure
 
 * runDSO_municipality (Check out the :ref:`DSO` section)
 
-  * dgep_run_DSO.m
-  * dgep_Run_DSO_reg.m		
-  * dgep_Variables_DSO_reg.m	
-  * dgep_struct2variable_DSO_reg.m
-  * dgep_Constraints_DSO_reg.m	
-  * dgep_Objective_DSO_reg.m	
-  * dgep_saveoutput_DSO_reg.m
-  * output_wrapper_DSO.m
-  * testing_DSO_reg.m
+  * :ref:`dgep_run_DSO`
+  * :ref:`dgep_Run_DSO_reg`		
+  * :ref:`dgep_Variables_DSO_reg`	
+  * :ref:`dgep_struct2variable_DSO_reg`
+  * :ref:`dgep_Constraints_DSO_reg`	
+  * :ref:`dgep_Objective_DSO_reg`	
+  * :ref:`dgep_saveoutput_DSO_reg`
+  * :ref:`output_wrapper_DSO`
+  * :ref:`testing_DSO_reg`
 
 
-* and here the parent list continues
+* dgepModule				
+* municipality2node
+* dgep_ReadCgepData
+* dgep_convertDatabaseData
+* results_check
+* dgep_pullfromdatabase			
+* dgep_saveoutput	
 
 
 .. _HH:
@@ -295,8 +315,62 @@ testing_LC_reg
 DSO submodule
 --------------------------------------------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+  
+.. _dgep_run_DSO:
+
+dgep_run_DSO
+~~~~~~~~~~~~~~
+
+
+.. _dgep_Run_DSO_reg:
+
+dgep_Run_DSO_reg
+~~~~~~~~~~~~~~
+
+
+.. _dgep_Variables_DSO_reg:
+
+dgep_Variables_DSO_reg
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _dgep_struct2variable_DSO_reg:
+
+dgep_struct2variable_DSO_reg
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _dgep_Constraints_DSO_reg:
+
+dgep_Constraints_DSO_reg
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _dgep_Objective_DSO_reg:
+
+dgep_Objective_DSO_reg
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+.. _dgep_saveoutput_DSO_reg:
+
+dgep_saveoutput_DSO_reg
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _output_wrapper_DSO:
+
+output_wrapper_DSO
+~~~~~~~~~~~~~~~~~~
+
+
+.. _testing_DSO_reg:
+
+testing_DSO_reg
+~~~~~~~~~~~~~~~~~~
+
+
 
 .. code-block::
 
