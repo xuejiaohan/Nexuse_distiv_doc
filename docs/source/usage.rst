@@ -30,14 +30,14 @@ Code Structure
 --------------
 
 * input
-* runHH_district (Check out the :HH:`HH submodule` section)
+* runHH_district (Check out the :ref:`HH submodule` section)
 
   * with a nested list
   * and some subitems
   
-* runLC_municipality (Check out the :LC:`LC submodule` section)
+* runLC_municipality (Check out the :ref:`LC submodule` section)
 
-  * dgep_run_LC.m
+  * dgep_run_LC.m :ref:`dgep_run_LC`
   * dgep_Run_LC_reg.m		
   * dgep_struct2variable_LC_reg.m
   * dgep_Variables_LC_reg.m		
@@ -47,7 +47,7 @@ Code Structure
   * output_wrapper_LC.m
   * testing_LC_reg.m
   
-* runDSO_municipality (Check out the :DSO:`DSO submodule` section)
+* runDSO_municipality (Check out the :ref:`DSO submodule` section)
 
   * dgep_run_DSO.m
   * dgep_Run_DSO_reg.m		
@@ -73,6 +73,43 @@ HH (household) submodule
 LC (large consumer) submodule
 -----------------------------
 
+.. _dgep_run_LC:
+
+To retrieve the optimal investments and dispatch decisions made by large consumers, you can run the ``dgep_run_LC()`` function:
+
+.. code-block::
+
+   resDistIv_LC_agg = dgep_run_LC(obj,CGEPtoDGEP, data, ScenarioId, ExaminedYear, T, RepresentPeriods, NumSameSimulate)
+
+* Description
+
+  * This is the main running script for the LC submodule
+
+* Parameters
+
+  * ``obj``: DistIv object
+  * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
+  * ``ScenarioId``: index for the simulated scenario
+  * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
+  * ``T``: simulated hours for each examined year
+  * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
+  * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
+
+
+* What the function returns
+
+  * Optimal investments and dispatch decisions made by large consumers for each region (i.e., municipalities in Switzerland)
+
+
+
+To test the standalone version of the LC submodule, you can run the ``testing_LC_reg()`` function.
+
+* Description
+
+  * This is the stanadlone running script for the LC submodule
+  
+  
+  
 
 
 .. _DSO:
@@ -80,6 +117,8 @@ LC (large consumer) submodule
 DSO (distribution system operator) submodule
 --------------------------------------------
 
+To retrieve a list of random ingredients,
+you can use the ``lumache.get_random_ingredients()`` function:
 
 .. code-block::
 
