@@ -39,16 +39,17 @@ Code Structure
   
 * runLC_municipality (Check out the :ref:`LC` section)
 
-  * dgep_run_LC.m :ref:`dgep_run_LC`
-  * dgep_Run_LC_reg.m		
-  * dgep_struct2variable_LC_reg.m
-  * dgep_Variables_LC_reg.m		
-  * dgep_Constraints_LC_reg.m	
-  * dgep_Objective_LC_reg.m		
-  * dgep_saveoutput_LC_reg.m
-  * output_wrapper_LC.m
-  * testing_LC_reg.m
-  
+  * :ref:`dgep_run_LC`
+  * :ref:`dgep_Run_LC_reg`	
+  * :ref:`dgep_struct2variable_LC_reg`
+  * :ref:`dgep_Variables_LC_reg`
+  * :ref:`dgep_Constraints_LC_reg`	
+  * :ref:`dgep_Objective_LC_reg`		
+  * :ref:`dgep_saveoutput_LC_reg`
+  * :ref:`output_wrapper_LC`
+  * :ref:`testing_LC_reg`
+
+
 * runDSO_municipality (Check out the :ref:`DSO` section)
 
   * dgep_run_DSO.m
@@ -67,12 +68,12 @@ Code Structure
 
 .. _HH:
 
-HH (household) submodule
+HH submodule
 ------------------------
 
 .. _LC:
 
-LC (large consumer) submodule
+LC submodule
 -----------------------------
 
 .. _dgep_run_LC:
@@ -80,11 +81,10 @@ LC (large consumer) submodule
 dgep_run_LC
 ~~~~~~~~~~~~
 
-To retrieve the optimal investments and dispatch decisions made by large consumers, you can run the ``dgep_run_LC()`` function:
-
 .. code-block::
 
-   resDistIv_LC_agg = dgep_run_LC(obj,CGEPtoDGEP, data, ScenarioId, ExaminedYear, T, RepresentPeriods, NumSameSimulate)
+   resDistIv_LC_agg = dgep_run_LC(obj,CGEPtoDGEP, data, ScenarioId, ExaminedYear, ...
+   T, RepresentPeriods, NumSameSimulate)
 
 * Description
 
@@ -107,6 +107,84 @@ To retrieve the optimal investments and dispatch decisions made by large consume
 
 
 
+.. _dgep_Run_LC_reg:
+
+dgep_Run_LC_reg
+~~~~~~~~~~~~~~~
+
+.. code-block::
+
+resDistIv_LC = dgep_Run_LC_reg(CGEPtoDGEP, data, ScenarioId,...
+ ExaminedYear, T, RepresentPeriods, NumSameSimulate, n_periods, nMuni,...
+ i_Muni_start, i_Muni_end, alpha_ex, T_r, dgepfolder,dgepfolder_output)
+
+* Description
+
+  * This is the main running script for the LC submodule
+
+* Parameters
+
+  * ``obj``: DistIv object
+  * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
+  * ``ScenarioId``: index for the simulated scenario
+  * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
+  * ``T``: simulated hours for each examined year
+  * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
+  * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
+
+
+* What the function returns
+
+  * Optimal investments and dispatch decisions made by large consumers for each region (i.e., municipalities in Switzerland)
+
+
+
+
+
+.. _dgep_struct2variable_LC_reg:
+
+dgep_struct2variable_LC_reg
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _dgep_Variables_LC_reg:
+
+dgep_Variables_LC_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+.. _dgep_Variables_LC_reg:
+
+dgep_Variables_LC_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+.. _dgep_Constraints_LC_reg:
+
+dgep_Constraints_LC_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _dgep_Objective_LC_reg:
+
+dgep_Objective_LC_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+.. _dgep_saveoutput_LC_reg:
+
+dgep_saveoutput_LC_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+
+.. _output_wrapper_LC:
+
+output_wrapper_LC
+~~~~~~~~~~~~~~~~~~
+
+.. _testing_LC_reg:
+
+testing_LC_reg
+~~~~~~~~~~~~~~
+
+
+
 To test the standalone version of the LC submodule, you can run the ``testing_LC_reg()`` function.
 
 * Description
@@ -119,7 +197,7 @@ To test the standalone version of the LC submodule, you can run the ``testing_LC
 
 .. _DSO:
 
-DSO (distribution system operator) submodule
+DSO submodule
 --------------------------------------------
 
 To retrieve a list of random ingredients,
