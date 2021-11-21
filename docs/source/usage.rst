@@ -274,7 +274,7 @@ output_wrapper_LC
 
 * Description
 
-  * This is the function to combine LC submodule outputs for different regions (i.e., municipalities) into one  
+  * This is the function to combine LC submodule outputs for different regions (i.e., municipalities) into one output structure
   
 
 
