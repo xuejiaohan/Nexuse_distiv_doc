@@ -556,6 +556,12 @@ dgepModule
 
   * This is the function for initializing the running DistIv module
   
+* Parameters
+
+  * ``obj``: DistIv object
+  * ``wspace``: structure with information of the simulated scenario 
+  * ``conn``: structure with MySQL database connection information
+
 
 .. code-block::
 
