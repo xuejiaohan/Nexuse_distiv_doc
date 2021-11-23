@@ -542,15 +542,49 @@ Other scripts
 .. _dgepModule:
 
 dgepModule
-~~~~~~~~~~~~~~
-
-.. code-block::
-
-   data_distiv = convertDatabaseData(input_database)
+~~~~~~~~~~~
 
 * Description
 
-  * This is used to restructure the data from the MySQL database to be used in DistIv
+  * This is the module wrapper class for the DistIv module
+
+.. code-block::
+
+   obj = dgepModule(wspace,conn)
+   
+* Description
+
+  * This is the function for initializing the running DistIv module
+  
+
+.. code-block::
+
+   DGEPtoCGEP = sendToCgep(obj)
+   
+* Description
+
+  * This is the function for generating the interface data used by CentIv (used to call CGEP)
+
+
+.. code-block::
+
+   DGEPtoCGE = sendToCge(obj) 
+   
+* Description
+
+  * This is the function for generating the interface data used by Gmel (used to call CGE)
+
+
+.. code-block::
+
+   DGEPtoEEM = sendToEEM(obj) 
+   
+* Description
+
+  * This is the function for generating the interface data used by eMark (used to call EEM)
+
+.. note::
+   This interface with the market module, i.e., eMark, was not established yet and remains as the future work.
 
 
 
@@ -638,7 +672,7 @@ dgep_ReadCgepData
 
 * What the function returns
 
-  * Processed the interface data from CentIv and solve the inconsistency in spatial resolution so as to be used by DistIv
+  * Processed interface data from CentIv and solve the inconsistency in spatial resolution so as to be used by DistIv
 
 
 .. _municipality2node:
@@ -651,7 +685,7 @@ municipality2node
 .. note::
    The script needs to run once to create the input mapping matrix and need to only run again if a new set of tranmission nodes are used;
    
-   The process is differentiated before and after 2020 due to the changes of transmission nodes in CentIv
+   The process is differentiated before and after 2020 due to the changes of transmission nodes in CentIv.
    
    
 
