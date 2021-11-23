@@ -33,21 +33,20 @@ Code Structure
 * input
 * runHH_district (Check out the :ref:`HH` section)
 
-  * testing_HH
-  * ratio_municipalityOFcanton
-  * readinput_CH
-  * readinput_reg
-  * readinput_sim
-  * canton2municipality
-  * dgep_run_HH
-  * run_reg
-  * run_struct2variable_reg
-  * run_variables_reg
-  * run_constraints_reg
-  * run_objective_reg
-  * run_postprocess_reg_full
-  * run_saveoutput_reg
-  * output_wrapper_HH
+  * :ref:`ratio_municipalityOFcanton`
+  * :ref:`canton2municipality`
+  * :ref:`dgep_run_HH`
+  * :ref:`run_reg`
+  * :ref:`readinput_CH`
+  * :ref:`readinput_reg`
+  * :ref:`readinput_sim`
+  * :ref:`run_struct2variable_reg`
+  * :ref:`run_variables_reg`
+  * :ref:`run_constraints_reg`
+  * :ref:`run_objective_reg`
+  * :ref:`run_saveoutput_reg`
+  * :ref:`output_wrapper_HH`
+  * :ref:`testing_HH`
 
 
 * runLC_municipality (Check out the :ref:`LC` section)
@@ -92,6 +91,304 @@ HH submodule
 
 .. note::
    Some of the parameters or variables shared by different functions or scripted are described only once to avoid redundancy.
+  
+
+
+
+.. _ratio_municipalityOFcanton:
+
+ratio_municipalityOFcanton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   ratio_bfs = ratio_municipalityOFcanton(list_bfs)
+
+* Description
+
+  * This script calculates the ratio of the municipality results to the cantonal ones using Sonnendach dataset
+
+* Parameters
+
+  * ``list_bfs``:  municipality index (bfs number) or name
+ 
+* What the function returns
+
+  * return the solar deployment potential ratio of specific municipality out of the canton [area, irr, consumption]
+
+.. note::
+  This function is currently not used as the conversion from the cantonal or district-level outputs to the municipal ones are done directly in ``output_wrapper_HH``.
+  
+  
+  
+.. _canton2municipality: 
+ 
+canton2municipality
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   res_bfs = canton2municipality(list_bfs)
+
+* Description
+
+  * This script converts cantonal results into the ones of municipality using the calculated municipality ratio
+
+* Parameters
+
+  * ``list_bfs``:  municipality index (bfs number) or name
+ 
+* What the function returns
+
+  * converted municipal results based on the corresponding cantonal results and the municipality ratio
+
+.. note::
+  This function is currently not used as the conversion from the cantonal or district-level outputs to the municipal ones are done directly in ``output_wrapper_HH``.
+ 
+ 
+
+.. _dgep_run_HH:
+
+dgep_run_HH
+~~~~~~~~~~~~
+
+.. code-block::
+
+   resDistIv_HH_agg = dgep_run_HH(obj, CGEPtoDGEP, data, ScenarioId, ExaminedYear, ...
+   T, RepresentPeriods,NumSameSimulate)
+
+* Description
+
+  * This is the main running script for the HH submodule
+
+* Parameters
+
+  * ``obj``: DistIv object
+  * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
+  * ``data``: input data structure retrieved from the database
+  * ``ScenarioId``: index for the simulated scenario
+  * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
+  * ``T``: simulated hours for each examined year
+  * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
+  * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
+
+
+* What the function returns
+
+  * Optimal investments and dispatch decisions made by households in all regions (i.e., municipalities in Switzerland), candidate units considered currently include rooftop solar and PV-battery units
+
+
+
+.. _run_reg:
+
+run_reg
+~~~~~~~~
+
+.. code-block::
+
+   res = run_reg(obj, input, i_reg, i_scen, ExaminedYear, i_consume, NumSameSimulate, ...
+   dgepfolder, dgepfolder_output, i_geores)
+
+
+* Description
+
+  * This is the function to run the optimization for residential customer groups at a specific region (i.e., municipality, district or canton) with certain annual electricity consumption level
+
+* Parameters
+
+  * ``obj``: DistIv objective
+  * ``input``: input data structure
+  * ``ExaminedYear``: e.g., 2020, 2030, 2040 or 2050
+  * ``i_consume``: index of the predefined annual electricity consumption level
+  * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
+  * ``dgepfolder``: path of the DistIv folder
+  * ``dgepfolder_output``: path of the DistIv output folder
+  * ``i_geores``: index of the spatial resolution level (i.e., 1~3 corresponding to canton-, district- and municipality-level, respectively)
+  
+
+* What the function returns
+
+  * Optimal investments and dispatch decisions made by residential customer groups at a specific region with certain annual electricity consumption level
+
+
+
+.. _readinput_CH:
+
+readinput_CH
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   input = readinput_CH(obj, CGEPtoDGEP, data, ScenarioId, ExaminedYear, T, NumSameSimulate, dgepfolder)
+
+* Description
+
+  * This script is used to load the general simulation input data and parameters for all regions in Switzerland used by DistIv
+  
+* What the function returns
+
+  * General input data structure applied for Switzerland
+  
+  
+.. _readinput_reg:
+
+readinput_reg
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   input = readinput_reg(input, i_reg, index_reg, i_canton, dgepfolder, dgepfolder_output, i_geores)
+
+* Parameters
+
+  * ``input``: input data structure
+  * ``i_reg``: index of the region
+  * ``index_reg``: official index of the region (this is official index published by the government)
+  * ``i_canton``: official index of the canton the region is associated to
+  * ``dgepfolder``: path of the main DistIv folder
+  * ``dgepfolder_output``: path of the main DistIv output folder
+  * ``i_geores``: index of the spatial resolution (1~3 corresponding to cantonal, district and municipal level)
+
+* Description
+
+  * This script is used to load the general simulation input data and parameters for a specific region considering predefined spatial resolution
+  
+* What the function returns
+
+  * Input data structure for a specific region
+
+
+.. _readinput_sim:
+
+readinput_sim
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   input = readinput_sim(input, i_reg, i_consume, ExaminedYear, n_periods, dgepfolder, dgepfolder_output, i_geores)
+
+* Parameters
+
+  * ``i_consume``: index of the annual electricity consumption level
+
+* Description
+
+  * This script is used to load the input data and parameters for the specific simulation corresponding to a specific residential customer group
+  
+* What the function returns
+
+  * Input data structure for a specific customer group
+  
+
+.. _run_struct2variable_reg:
+
+run_struct2variable_reg
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This script is used to unwrapp the input data/parameters so as to be used for the HH submodule
+
+
+
+.. _run_variables_reg:
+
+run_variables_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This script is used to define variables used for the HH submodule
+
+.. warning::
+    Currently system-controlled DSM is implemented in the DSO submodule, 
+
+* Variables
+
+  * ``x_inv_pv``: continuous investment capacities for PVs per size category type, per roof size area and per irradiation level
+  * ``u_inv_pv``: binary investment decisions for PVs per size category type, per roof size area and per irradiation level
+  * ``x_inv_bat_e``: invested energy capacity for PV-battery per battery category type, per roof size area and per irradiation level
+  * ``x_inv_bat_p``: invested power capacity for PV-battery per battery category type, per roof size area and per irradiation level
+
+  * ``PV_selfconsume``: hourly self-consumed PV generation per roof size area and per irradiation level
+  * ``PV_gen_ann``: annual PV generation per PV size category, per roof size area and per irradiation level
+  * ``PV_generation``:hourly PV generation per roof size area and per irradiation level
+  * ``PV_curtail``: hourly PV curtailment per roof size area and per irradiation level
+  * ``p_l_solar``: hourly demand per roof size area and per irradiation level
+  * ``r_Lu``: hourly upward load shifting per roof size area and per irradiation level
+  * ``r_Ld``: hourly downward load shifting per roof size area and per irradiation level
+  * ``p_l_solar_new``: hourly updated demand per roof size area and per irradiation level
+
+  * ``p_pv2grid``: hourly power flow from PV system to grid per roof size area and per irradiation level
+  * ``p_grid2pv``: hourly power flow from grid system to PV per roof size area and per irradiation level
+  * ``p_pv2load``: hourly power flow from PV system to load per roof size area and per irradiation level
+  * ``p_pv2bat``: hourly power flow from PV system to battery per roof size area and per irradiation level
+  * ``p_bat2load``: hourly power flow from battery to load per roof size area and per irradiation level
+
+  * ``p_h_solar``: hourly discharging power of pv-battery per roof size area and per irradiation level
+  * ``p_hc_solar``: hourly charging power of pv-battery per roof size area and per irradiation level
+  * ``u_h_solar``: binary variable for charging/discharging status of pv-battery per roof size area and per irradiation level
+  * ``E_h_solar``: hourly SOC (state-of-charge) of the pv-battery per roof size area and per irradiation level
+
+
+.. _run_constraints_reg:
+
+run_constraints_reg
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This script is used to define constraints used for the optimization
+
+
+
+.. _run_objective_reg:
+
+run_objective_reg
+~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This script is used to define objective used for the optimization
+
+
+
+.. _run_saveoutput_reg:
+
+run_saveoutput_reg
+~~~~~~~~~~~~~~~~~~
+
+* Description
+
+  * This sript is used to save and process important results into the output structure
+
+
+
+.. _output_wrapper_HH:
+
+output_wrapper_HH
+~~~~~~~~~~~~~~~~~
+
+.. code-block::
+
+   resDistIv_HH_agg = output_wrapper_HH(mapping_table, ScenarioId, ExaminedYear, dgepfolder, ...
+   dgepfolder_output, i_geores)
+
+* Description
+
+  * This is the function to combine HH submodule outputs for different regions into one output structure
+  
+
+
+.. _testing_HH_reg:
+
+testing_HH_reg
+~~~~~~~~~~~~~~
+
+* Description
+
+  * This is the stanadlone running script for the HH submodule
+
 
 
 
