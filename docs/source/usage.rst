@@ -160,7 +160,7 @@ dgep_Run_LC_reg
   * ``T``: simulated hours for each examined year
   * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
   * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
-  * ``n_periods``: 
+  * ``n_periods``: number of simulation periods examined
   * ``nMuni``: number of municipalities to be optimized for each run (adjusted considering a trade-off between the time consumed for each run and the total number of runnings, as optimizations for each municipality can be made in parallel)
   * ``i_Muni_start``: index of the municipality to start with 
   * ``i_Muni_end``: index of the municipality to end with
@@ -572,14 +572,14 @@ dgep_pullfromdatabase
   * Input data structure with data that is used by distiv from MySQL
   
   
-.. _convertDatabaseData:
+.. _dgep_convertDatabaseData:
 
-convertDatabaseData
-~~~~~~~~~~~~~~
+dgep_convertDatabaseData
+~~~~~~~~~~~~~~~~~~~~
 
 .. code-block::
 
-   data_distiv = convertDatabaseData(input_database)
+   data_distiv = dgep_convertDatabaseData(input_database)
 
 * Description
 
@@ -606,7 +606,7 @@ dgep_ReadCgepData
 
   * This function is used to read and process and input data from CentIv
 
-* Parameters
+* Input Parameters
 
   * ``data``: input data structure retrieved from the database
   * ``NumSameSimulate``: set to 2 if every one of the two days is simulated for the operational decisions (to reduce the computational burden) 
@@ -615,12 +615,30 @@ dgep_ReadCgepData
   * ``pr_RM_add``: adjustment added to the reserve prices from CentIv (set to zero currently)
   * ``CGEPtoDGEP``: CentIv-to-DistIv input data structure
   * ``ScenarioId``: index for the simulated scenario
-  * ``mapping_table``: 
+  * ``mapping_table``:  mapping data defining the relationship between canton, district, municipality, and transmission nodes at the tranmission level
   
+* Output Parameters
+
+  * ``demand``: demand structure including ``pr_DAtotal`` and ``pr_DA``
+  * ``pr_DAtotal``: hourly wholesale energy price profile per transmission node from CentIv [hour*node]
+  * ``pr_DA``: converted hourly wholesale energy price profile per municipality [hour*municipality]
+  * ``pr_cRMu``: converted hourly upward reserve capacity provision price profile per municipality [hour*municipality]
+  * ``pr_cRMd``: converted hourly downward reserve capacity provision price profile per municipality [hour*municipality]
+  * ``T``: simulated hours for each examined year
+  * ``RepresentPeriods``: set to 1 at the moment and can be set to other numbers when representative days/weeks are used
+  * ``nNode``: number of transmission nodes in CentIv for the examined year
+  * ``node2muni``: matrix to map the tranmission node in CentIv to the municipality in Switzerland [node*municipality]
+  * ``muni2node``: matrix to map the municipality in Switzerland to the tranmission node in CentIv [municipality*node]
+  * ``demandMuni``: converted hourly demand profile per municipality [hour*municipality]
+  * ``P_RMu_req``: hourly upward reserve bidding requirement from CentIv [hour*1]
+  * ``P_RMd_req``: hourly downward reserve bidding requirement from CentIv [hour*1]
+  * ``raw_demand``: raw data of the excel related to demand from CentIv
+  * ``raw_Reserves``: raw data of the excel related to reserves from CentIv
+
 
 * What the function returns
 
-  * Processed data that need to be used by DistIv
+  * Processed the interface data from CentIv and solve the inconsistency in spatial resolution so as to be used by DistIv
 
 
 .. _municipality2node:
@@ -628,12 +646,14 @@ dgep_ReadCgepData
 municipality2node
 ~~~~~~~~~~~~~~
 
-.. code-block::
+* Description: the script is used to create mapping between municipalities and transmission nodes, i.e., mapping table ``mapping_table_b2020`` before 2020 and mapping table ``mapping_table_a2020`` after 2020
 
-   data_distiv = convertDatabaseData(input_database)
-
-* Description
-
+.. note::
+   The script needs to run once to create the input mapping matrix and need to only run again if a new set of tranmission nodes are used;
+   
+   The process is differentiated before and after 2020 due to the changes of transmission nodes in CentIv
+   
+   
 
 .. _dgep_saveoutput:
 
@@ -642,10 +662,20 @@ dgep_saveoutput
 
 .. code-block::
 
-   data_distiv = convertDatabaseData(input_database)
+   resDistIv = dgep_saveoutput(obj, resDistIv_HH_agg, resDistIv_LC_agg, resDistIv_DSO_agg)
 
-* Description
+* Description: this script is used to save and process important results from three submodules (i.e., HH, LC and DSO) into the output structure ``resDistIv``
 
+* Input Parameters
+
+  * ``obj``: DistIv object
+  * ``resDistIv_HH_agg``: aggregated output structure of HH submodule
+  * ``resDistIv_LC_agg``: aggregated output structure of LC submodule
+  * ``resDistIv_DSO_agg``: aggregated output structure of DSO submodule
+
+* What the function returns
+
+  * Processed aggregated output structure of DistIv
  
  
 .. _results_check:
@@ -653,11 +683,8 @@ dgep_saveoutput
 results_check
 ~~~~~~~~~~~~~~
 
-.. code-block::
 
-   data_distiv = convertDatabaseData(input_database)
-
-* Description
+* Description: This script is used to quickly check the DistIV resuklts based on the generation and consumption missmatch
 
 
 
