@@ -1,4 +1,4 @@
-Welcome to DistIv-doc documentation!
+Welcome to Nexus-e_DistIv documentation!
 ===================================
 
 **DistIv-doc** is a code documentary for the DistIv module of the integrated energy systems modelling platform `Nexus-e <https://nexus-e.org/>`_
