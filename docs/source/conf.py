@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Nexus-e_DistIv'
+copyright = '2021, Xuejiao Han'
+author = 'Xuejiao Han'
 
 release = '0.1'
 version = '0.1.0'
