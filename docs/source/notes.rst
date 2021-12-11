@@ -9,7 +9,7 @@ Remarks for Developers
 * To debug the code, it is suggested to:
 
   * turn off the parallization set in the main running script of each submodule, i.e., :ref:`dgep_run_HH`, :ref:`dgep_run_LC` and :ref:`dgep_run_DSO`
-  * turn on the debug mode and turn on the logging files by adjusting the sdpsetting of yalmip
+  * turn on the debug mode and the logging display by adjusting the sdpsetting of yalmip
   
 * To reduce the computation time, parallization is used to run simulations for multiple regions at the same time. The number of workers for parallization can be decreased to reduce the memory requirements for the DistIv simulation, which however results in longer simulation time. In order to adjust the trade-off between the simulation time for each run and for all runs, the number of regions simulated for each run in LC and DSO submodules can be tuned. Furthermore, the spatial resolution and the number of clusters applied for household customers in the HH submodule can be adjusted to trade-off between accuracy and computational efficiency.
 
@@ -27,4 +27,4 @@ Limitations and Future Work
 
 * Modeling of electric vehicles, which in the future are expected to account for a significant share of electricity consumption at the distribution level, needs to be incorporated.
 
-* Please refer to reports and papers listed in :ref:`reference` References Section for more detailed discussions regarding the limitations and future work for DistIv.
+* Please refer to reports and papers listed in :ref:`reference` Section for more detailed discussions regarding the limitations and future work for DistIv.
