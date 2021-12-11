@@ -4,7 +4,7 @@ Usage
 
 
 .. note::
-   The project is under active development and the document is subject to changed made to codes
+   The project is under active development and the document is subject to changes made to codes
 
 
 
