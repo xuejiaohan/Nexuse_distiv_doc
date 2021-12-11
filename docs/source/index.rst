@@ -18,4 +18,4 @@ Contents
    references
    setup
    usage
-   api
+   notes
